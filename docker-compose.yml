@@ -1,0 +1,42 @@
+version: "3"
+services:
+  db:
+    container_name: "db_try"
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "db_try"
+      MYSQL_ROOT_PASSWORD: "pass"
+    volumes:
+      - db_try:/var/lib/mysql
+    # networks:
+    #   - mynetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  app:
+    build: .
+    container_name: go
+    ports:
+      - "9090:9090"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: "db"
+      DB_USER: "root"
+      DB_PASS: "pass"
+      DB_NAME: "db_try"
+      DB_port: 3306
+    # networks:
+    #   - mynetwork
+
+volumes: 
+  db_try:
+
+
+
