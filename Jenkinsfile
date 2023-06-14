@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     // Define dockerImage variable 
-                    def dockerImage = docker.build("go/docker", "--file Dockerfile .")
+                    dockerImage = docker.build("go/docker", "--file Dockerfile .")
                 }
             }
         }
