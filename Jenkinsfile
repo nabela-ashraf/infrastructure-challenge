@@ -12,11 +12,13 @@ pipeline {
         stage('Build the docker image') {
             steps {
                 script {
-                     def app = docker.build('go/docker', '-f Dockerfile .')
-                     app.inside {
-                        sh 'npm install'
-                        sh 'npm run build'
+                     docker.withRegistry('https://hub.docker.com/r/nabelaashraf/instabug-challenge', 'dockerhub-key') {
+                        def app = docker.build('go/docker', '-f Dockerfile .')
+                        app.inside {
+                           sh 'npm install'
+                           sh 'npm run build'
                     }
+                  }
                 }
             }
         }
