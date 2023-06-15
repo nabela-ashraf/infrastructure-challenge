@@ -28,10 +28,10 @@ pipeline {
                 echo 'push image done'
                 }
             }
+    }
     post {
         always {
           sh 'docker logout'
         }
     }
   }
-}
