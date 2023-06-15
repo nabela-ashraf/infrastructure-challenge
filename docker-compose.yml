@@ -6,17 +6,15 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: "db_try"
+      MYSQL_DATABASE: "internship"
       MYSQL_ROOT_PASSWORD: "pass"
     volumes:
       - db_try:/var/lib/mysql
-    # networks:
-    #   - mynetwork
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 5
 
   app:
     build: .
@@ -27,14 +25,10 @@ services:
       db:
         condition: service_healthy
     environment:
-      DB_HOST: "db"
-      DB_USER: "root"
-      DB_PASS: "pass"
-      DB_NAME: "db_try"
-      DB_port: 3306
-    # networks:
-    #   - mynetwork
-
+      MYSQL_HOST: "db_try"
+      MYSQL_USER: "root"
+      MYSQL_PASS: "pass"
+      MYSQL_port: 3306
 volumes: 
   db_try:
 
