@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-key') {
-                        def customImage = docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}")
+                        def customImage = docker.image('do/docker')
                         customImage.push()
                     }
                 }
