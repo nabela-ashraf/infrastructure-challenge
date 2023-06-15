@@ -25,7 +25,7 @@ pipeline {
         stage('Push the image') {
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com/r/nabelaashraf/instabug-challenge', 'dockerhub-key') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-key') {
                         def customImage = docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}")
                         customImage.push()
                     }
