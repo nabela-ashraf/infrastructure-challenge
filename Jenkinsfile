@@ -24,9 +24,12 @@ pipeline {
         }
         stage('Push the image') {
             steps {
-                sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u '$DOCKERHUB_CREDENTIALS_USR' --password-stdin"
-                sh 'docker push go/docker'
-                echo 'push image done'
+                script {
+                    docker.withRegistry('https://hub.docker.com/r/nabelaashraf/instabug-challenge', 'dockerhub-key') {
+                        def customImage = docker.image("${env.DOCKER_IMAGE}:${env.DOCKER_TAG}")
+                        customImage.push()
+                    }
+                }
             }
         }
     }
