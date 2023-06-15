@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build the docker image') {
             steps {
-                sh 'docker build -t go-docker .'
+                sh 'docker build -t go-docker:latest .'
                 echo 'build image done'
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u '$DOCKERHUB_CREDENTIALS_USR' --password-stdin"
                 echo 'login done'
-                sh 'docker push instabug-challenge/go-docker'
+                sh 'docker push go-docker:latest'
                 echo 'push image done'
             }
         }
