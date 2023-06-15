@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/nabela-ashraf/infrastructure-challenge.git'
+                checkout scm
                 echo 'Git Checkout'
             }
         }
