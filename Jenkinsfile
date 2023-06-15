@@ -20,14 +20,16 @@ pipeline {
             steps {
                 sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u '$DOCKERHUB_CREDENTIALS_USR' --password-stdin"
                 echo 'login done'
-            }
-        }
-        stage('Push the image') {
-            steps {
                 sh 'docker push go/docker'
                 echo 'push image done'
-                }
             }
+        }
+        // stage('Push the image') {
+        //     steps {
+        //         sh 'docker push go/docker'
+        //         echo 'push image done'
+        //         }
+        //     }
     }
     post {
         always {
