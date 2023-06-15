@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build the docker image') {
             steps {
-                sh 'docker build -t go/docker:$BUILD_NUMBER .'
+                sh 'docker build -t go/docker .'
                 echo 'build image done'
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Push the image') {
             steps {
-              sh 'docker push go/docker:$BUILD_NUMBER'
+              sh 'docker push go/docker'
               echo 'push image done'
             }
         }
