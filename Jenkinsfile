@@ -24,11 +24,9 @@ pipeline {
         }
         stage('Push the image') {
             steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-key') {
-                        def customImage = docker.image('do/docker')
-                        customImage.push()
-                    }
+                docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-key') {
+                  docker.image(go/docker).push()
+                   }
                 }
             }
         }
