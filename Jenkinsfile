@@ -33,8 +33,5 @@ pipeline {
         always {
           sh 'docker logout'
         }
-        failure {
-          currentBuild.result = 'FAILURE'
-        }
     }
 }
