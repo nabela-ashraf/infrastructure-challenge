@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u '$DOCKERHUB_CREDENTIALS_USR' --password-stdin"
                 echo 'login done'
-                sh 'docker push go/docker'
+                sh 'docker push "https://hub.docker.com/r/nabelaashraf/instabug-challenge"'
                 echo 'push image done'
             }
         }
