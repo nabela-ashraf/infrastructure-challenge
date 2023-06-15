@@ -16,11 +16,11 @@ pipeline {
                 echo 'build image done'
             }
         }
-        stage('Docker login') {
+        stage('Docker login and Push the image') {
             steps {
                 sh "echo '$DOCKERHUB_CREDENTIALS_PSW' | docker login -u '$DOCKERHUB_CREDENTIALS_USR' --password-stdin"
                 echo 'login done'
-                sh 'docker push nabelaashraf/instabug-challenge'
+                sh 'docker push [docker.io/nabelaashraf/instabug-challenge]'
                 echo 'push image done'
             }
         }
