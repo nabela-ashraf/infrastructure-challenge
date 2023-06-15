@@ -6,36 +6,28 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                git 'https://github.com/nabela-ashraf/infrastructure-challenge.git'
+                echo 'Git Checkout'
             }
         }
         stage('Build the docker image') {
             steps {
-                script {
-                        def app = docker.build('go/docker', '-f Dockerfile .')
-                        app.inside {
-                           sh 'npm install'
-                           sh 'npm run build'
-                    }
+               sh 'docker build -t go/docker:$BUILD_NUMBER .'
+                echo 'build image done'
                 }
             }
         }
         stage('Docker login') {
             steps {
-                script {
-                    docker.withRegistry('https://hub.docker.com/r/nabelaashraf/instabug-challenge', 'dockerhub-key') {
-                        docker.login()
-                    }
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKER_CREDENTIALS_USER --password-stdin'
+                echo 'login done'
                 }
             }
         }
         stage('Push the image') {
             steps {
-                script {
-                    // Access dockerImage variable 
-                    docker.withRegistry('https://hub.docker.com/r/nabelaashraf/instabug-challenge', 'dockerhub-key') {
-                        docker.image('go/docker').push()
-                    }
+                sh 'docker push go/docker:$BUILD_NUMBER'
+                echo 'push image done'
                 }
             }
         }
