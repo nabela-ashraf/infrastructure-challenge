@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-configmap
+data:
+  username: "root" 
+  host: "db-service"
+  port: "3306"
