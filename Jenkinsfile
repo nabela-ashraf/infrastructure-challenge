@@ -30,6 +30,5 @@ pipeline {
                 echo 'push image done'
                 }
             }
-        }
     }
 }
