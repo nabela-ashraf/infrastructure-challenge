@@ -24,8 +24,8 @@ pipeline {
         }
         stage('Push the image') {
             steps {
-                docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-key') 
-                  docker.image(go/docker).push()
+                sh 'docker push go/docker'
+                echo 'push image done'
                 }
             }
     post {
