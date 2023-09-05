@@ -9,12 +9,6 @@ RUN go mod download
 COPY *.go ./
 RUN CGO_ENABLED=0 GOOS=linux go build -o /go-docker
 
-#add user rather than root
-RUN adduser -u 1 infra
-
-#Change to the user created
-USER infra
-
 # Run stage
 FROM alpine:3.14
 
